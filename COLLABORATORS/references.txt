@@ -1,0 +1,11 @@
+#References:
+
+
+1. https://www.tutorialspoint.com/python/python_reg_expressions.htm | undrestand re package
+2. https://docs.python.org/3.8/library/sqlite3.html#sqlite3.Cursor  |  for Sqlite part
+3. https://stackoverflow.com/questions/49028611/pytest-cannot-find-module | solve the pipenv run  pytest problem by adding __init__.py to tesr
+4. https://stackoverflow.com/questions/82875/how-to-list-the-tables-in-a-sqlite-database-file-that-was-opened-with-attach | Read number of the pages
+5. Mahlet Kabeto  | Mahlet. KabetoJust@ou.edu| discuss about the whole project
+6. Dr. Grant |cgrant@ou.edu | ask question
+7. keerti benweer | keerti.banweer@ou.edu | ask question about extracting the part  
+
