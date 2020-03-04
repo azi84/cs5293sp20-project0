@@ -21,7 +21,7 @@ All directory and file was created in the cloud SSH can use $git clone + you git
    3. $git commit -m "your comment"
    4. $git push origin master
 
-# Directory :
+##  Directory :
 
 We need to make a blow directory in our cloud instants(ssh):
 
@@ -44,19 +44,28 @@ We need to make a blow directory in our cloud instants(ssh):
     └── ..
           
 
-Then start to make your directory such as ##project0/docs/test... with the command:
+### Directory and files:
+
+For starting to make your directory such as ##project0/docs/test... with the command:
  
+
   mkdir "name of directory"
 
-While for making the ##Pipfile and ##Pipfile.lock we need the other kind of command for them like :
+### Pipfile and Pipfile.lock :
+
+For these two file we need the other kind of command for them like :
 
    Pipfile ==>      $pipenv --python python3
 
    Pipfile.lock ==> $pipenv install requests
 
-The ##main.py file  is contain the main function of our codes and after we wrote our python code in project0.py we need to call them from this file.
+### Main.py:
+
+This file is contain the main function of our codes and after we wrote our python code in project0.py we need to call them from this file.
  
-The ##setup.py is contain below codes which you can write into it by using Vim setup.py command :
+### Setup.py:
+
+ This file is contain below codes which you can write into it by using Vim setup.py command :
 
  from setuptools import setup, find packages
   setup(
@@ -69,14 +78,16 @@ The ##setup.py is contain below codes which you can write into it by using Vim s
 	tests_require=['pytest']	
         )
 
-Finally the ##setup.cfg file should have at least the following text inside which  for writing into it we use Vim setup.cfg command:
+### Setup.cfg:
+ 
+ This  file should have at least the following text inside which  for writing into it we use Vim setup.cfg command:
   [aliases]
   test=pytest
 
   [tool:pytest]
   norecursedirs = .*, CVS, _darcs, {arch}, *.egg, venv 
 
-## packages:
+## Packages:
 
 Following the packages were used in this projects that for having them in your SSH you need to use the ##pipenve install filename.
     
@@ -91,7 +102,6 @@ We use the blow function in our main.py file as main function and when we are do
 
 
 import argparse
-
 import project0
 
 def main(url):
@@ -112,13 +122,13 @@ def main(url):
     project0.status(db)
 
 
-   if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--incidents", type=str, required=True, 
+     if __name__ == '__main__':
+         parser = argparse.ArgumentParser()
+          parser.add_argument("--incidents", type=str, required=True, 
                          help="The arrest summary url.")
      
-    args = parser.parse_args()
-    if args.arrests:
+     args = parser.parse_args()
+     if args.arrests:
         main(args.arrests)
 
 ## Project :
@@ -212,11 +222,11 @@ As I said before We have five function in this project:
 	
     ##4.Print Status
 
-   The ##status(db) function is our last function that prints the finall result we want. Here we want a list of the nature of incidents and the number of times they have occured. 
-   The list should be sorted alphabetically by the nature. Also need to separeated with the "|"  which I used the print with the star and sep="|".
+    The ##status(db) function is our last function that prints the finall result we want. Here we want a list of the nature of incidents and the number of times they have occured. 
+    The list should be sorted alphabetically by the nature. Also need to separeated with the "|"  which I used the print with the star and sep="|".
 
 
-##Check the project result:
+## Check the project result:
 
 After we wrote the whole project we need to run in to make sure that it gives us all desirable output we want for this part we need the blow code that we use it in our ssh and we need to add the url to it to see the final result :
   
@@ -326,7 +336,7 @@ for this part:
                   assert 0
 
 
-##Check the test result:
+## Check the test result:
 
 For checking the test result in ssh we need to install pytest first. I install pytest with the ##pip install pytest
 because pipenv install pytest dosen't work for me.Finally after writig all the test functiona the test should be run
