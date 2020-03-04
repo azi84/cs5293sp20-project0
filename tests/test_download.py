@@ -60,7 +60,7 @@ def test_status():
     s = project0.status(db)
     with open("test.txt", "w") as file:
         d= file.write(str(s))
-    print (d)
-   # assert type(d) == int
-    assert 0
+   # print (d)
+    assert type(d) == int
+   # assert 0
 
