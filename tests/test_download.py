@@ -21,9 +21,10 @@ def test_extract_num_of_pages():
    fp.write(data)
    fp.seek(0)
    pdf = PdfFileReader(fp)
-   pdf.getNumPages()
-   print(pdf.getNumPages())
-   assert 0
+   d= pdf.getNumPages()
+   #print(d)
+   # assert 0
+   assert d == 23
 def test_extract_length():
     data= project0.fetchincidents(url)
     incidents = project0.extractincidents(data)
@@ -37,8 +38,7 @@ def test_createdb():
     res = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
     
     for name in res:
-        print (name[0])
-    assert 0
+         assert name[0] == 'incidents'
 
 def test_populatedb():
     data=project0.fetchincidents(url)
@@ -49,8 +49,8 @@ def test_populatedb():
     cur = con.cursor()
     cur.execute('SELECT incident_location  FROM incidents where nature="Traffic Stop";')
     row=cur.fetchall()
-    print(row)
-    assert 0
+    
+    assert row[0]== ('48TH AVE NE / E ROBINSON ST',)
   
 def test_status():
     data=project0.fetchincidents(url)
@@ -58,5 +58,9 @@ def test_status():
     db=project0.createdb()
     project0.populatedb(db,incidents)
     s = project0.status(db)
-    print(s)
+    with open("test.txt", "w") as file:
+        d= file.write(str(s))
+    print (d)
+   # assert type(d) == int
     assert 0
+

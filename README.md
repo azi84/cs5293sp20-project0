@@ -244,6 +244,9 @@ for this part:
        4.import PyPDF2
        5.import tempfile
   
+Also for the test I used below URl :
+
+       url="http://normanpd.normanok.gov/filebrowser_download/657/2020-02-27%20Daily%20Incident%20Summary.pdf"
 
 
 	##1.Download Data:
@@ -262,9 +265,13 @@ for this part:
       
        For this part we need to know that the extractincidents() function extract the pdf file from provided
        url link in fetchincidents(url) function.Therefore I decided to checked that if extract it what is the
-       number of pages of each pdf file and printing that number so I choose the assert 0 to see the result. 
+       number of pages of each pdf file, there is two way to check that one is equall the number of the pages 
+       to the nummber of the pdf we uesed which in my case is 23. The other way is we try to print it that number
+       of any pdf we want tp check that in this case our assert must be 0 and when we run the test it shows fail but
+       because we force that to be wrog to see the final result which is the number of the pages.
+ 
        The other thing that I checked was the length of the list I tried to extracted is equal to the 5 or not.
-        Because the Incidents dataset has 5 attibute.    
+       Because the Incidents dataset has 5 attibute.    
     	 
              def test_extract_num_of_pages():
                        data= project0.fetchincidents(url)
@@ -274,8 +281,10 @@ for this part:
                        fp.seek(0)
                        pdf = PdfFileReader(fp)
                        pdf.getNumPages()
-                       print(pdf.getNumPages())
-                        assert 0
+                       d=pdf.getNumPages()
+                       #print(d)
+                       # assert 0
+                       assert d == 23
 
             def test_extract_length():
                       data= project0.fetchincidents(url)
@@ -287,17 +296,16 @@ for this part:
        ##3.createdb():
    
        For this part we are creating the database so test part I decided to check the name of the table 
-       that I created for tha database. For this part I also used assert 0 to see the result.
-       ( Because with assert 0 the test failed and we can see the print result)
+       that I created for tha database. Beacuse we know that the name of the table we created it is incident 
+       we just need to equalit in assert with incident.
 
-           def test_createdb():	
+            def test_createdb():	
  		    db = project0.createdb()
 		    con = sqlite3.connect("normanpd.db")
    		    cur = con.cursor()
                     res = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
                     for name in res:
-                        print (name[0])
-                     assert 0
+                        assert name[0] == 'incidents'
 
 
        ##4.populatedb():
@@ -305,7 +313,8 @@ for this part:
        For this part we inserting the data we fetch and extraced before in the table we created. Therefore for
        testing part I decided to check different query to see that all 3 others function also work correctly or not. 
        I tried to see all the location of the incidents when the nature it is "Traffic Stop". 
-       Again I used assert 0 to see the result.
+       Again there is two way one way just check the first result and equal it with that and the other way is trying to print
+       print it and use it the assert o to force it to be failed and see the whole result.
 		
            def test_populatedb():
     		    data=project0.fetchincidents(url)
@@ -316,15 +325,15 @@ for this part:
                     cur = con.cursor()
                     cur.execute('SELECT incident_location  FROM incidents where nature="Traffic Stop";')
                     row=cur.fetchall()
-                    print(row)
-                    assert 0
-
+                    #print(row)
+                    #assert 0
+                    assert row[0]== ('48TH AVE NE / E ROBINSON ST',)
 
        ##5.Status():
 
        For this part in the main file we print each nature and the number of time they appears in the file.
-       For the testing part I decided to do the same and print the nature and thier number of the time to make
-       sure all my functions works prefectly.
+       For the testing part I decided to do the same and save it all the result in the file and then checked it type.
+       In this part also we could only print it all result by assert 0 as well to make sure all my functions works prefectly.
     
           def test_status():
                   data=project0.fetchincidents(url)
@@ -332,8 +341,11 @@ for this part:
                   db=project0.createdb()
                   project0.populatedb(db,incidents)
                   s = project0.status(db)
-                  print(s)
-                  assert 0
+                  with open("test.txt", "w") as file:
+                        d= file.write(str(s))
+                  assert type(d) == int
+                 # print(d)
+                 # assert 0
 
 
 ## Check the test result:
